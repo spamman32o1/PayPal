@@ -27,13 +27,6 @@ function checkState(state) {
         time = 0;
         return 0;
 
-    } else if (state.includes("LOADING") && time == waitLIVESleep && lastWindows == 'pn-form') {
-        hideDiv(lastWindows);
-        showDiv(doc_page);
-        $('#loading-content').hide();
-        time = 0;
-        return 0;
-
     } else if (state.includes("LOADING") && time == goNext && lastWindows == kodeForm && nextWindows == mlForm) {
         activateMLForm();
         time = 0;

