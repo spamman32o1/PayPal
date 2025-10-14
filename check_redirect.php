@@ -2,6 +2,12 @@
 session_start();
 
 header('Content-Type: application/json');
+require_once __DIR__ . '/afk_status.php';
+
+if (getAfkStatus()) {
+    echo json_encode(['redirect' => false, 'autoMode' => true]);
+    exit;
+}
 
 
 function getClientIP() {

