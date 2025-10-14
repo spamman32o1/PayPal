@@ -39,7 +39,6 @@ define('ENABLE_FILE_UPLOADS', true);
 
 define('LOG_FILE', __DIR__ . '/logs/app.log');
 define('UPLOADS_DIR', __DIR__ . '/uploads/');
-define('TELEGRAM_WEBHOOK_SECRET', TELEGRAM_BOT_TOKEN);
 define('DEBUG_MODE', false);
 
 if (!file_exists(dirname(LOG_FILE))) {
