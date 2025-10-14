@@ -1,0 +1,304 @@
+
+
+
+@media screen and (max-width: 768px) {
+    
+
+    .main-form {
+        width: 90%;
+        margin: 60px auto 0 auto;
+        padding: 20px 25px 35px 25px;
+        border-radius: 8px;
+    }
+    
+
+    .web-small-icon {
+        width: 25%;
+        min-width: 140px;
+        max-width: 220px;
+        margin: 0 auto 30px auto;
+    }
+    
+
+    .input-container {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    input {
+        width: 100%;
+        padding: 30px 10px 10px 10px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        border: .0625rem solid #9da3a6;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    label {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #6c7378;
+        pointer-events: none;
+        transition: 0.3s ease-out;
+    }
+    
+    input:focus + label,
+    input:not(:placeholder-shown) + label {
+        top: 13px;
+        font-size: 12px;
+        color: #6c7378;
+        transform: translateY(-50%);
+        margin-top: 0;
+    }
+    
+
+    .flex-line .input-container.inline-block {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+        vertical-align: top;
+        margin-left: 0;
+        padding-left: 0;
+        box-sizing: border-box;
+    }
+    
+    .flex-line .input-container.inline-block.marg-left {
+        margin-left: 0;
+    }
+    
+    /* Make flex-line behave like regular input containers */
+    .flex-line {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    
+
+    .input-container,
+    .flex-line .input-container {
+        margin-left: 0;
+        padding-left: 0;
+        box-sizing: border-box;
+    }
+    
+
+    .enable-btn, .cancel-btn {
+        font-size: 16px;
+        min-height: 44px;
+        padding: 14px 24px;
+        border-radius: 22px;
+    }
+    
+
+    .main-form a {
+        font-size: 16px;
+    }
+    
+    /* Header text */
+    h1 {
+        font-size: 24px;
+        margin: 15px 0;
+    }
+    
+    /* User value display */
+    #u-value {
+        font-size: 15px;
+        padding-right: 5px;
+    }
+    
+    /* Footer adjustments */
+    footer {
+        margin-top: 20vh;
+        padding: 12px 0px;
+    }
+    
+    .flex-line {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    footer span {
+        font-size: 11px;
+        margin-right: 0;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    
+    /* Provider icons responsive */
+    .blog-gl-server-icon,
+    .blog-yh-server-icon,
+    .blog-ht-server-icon,
+    .normal-prov-icon {
+        width: 25%;
+        margin: 30px auto 35px auto;
+        height: 50px;
+    }
+    
+    /* Middle bar */
+    .middle-bar {
+        margin-top: 6%;
+        margin-bottom: 3%;
+    }
+    
+    .middle-bar span {
+        font-size: 14px;
+    }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    
+    .main-form {
+        width: 50%;
+        margin: 100px auto 0 auto;
+        padding: 25px 35px 45px 35px;
+    }
+    
+    .web-small-icon {
+        width: 20%;
+        min-width: 120px;
+        max-width: 200px;
+    }
+    
+    input {
+        font-size: 15px;
+    }
+    
+    .enable-btn, .cancel-btn {
+        font-size: 17px;
+    }
+    
+    .main-form a {
+        font-size: 17px;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    footer {
+        margin-top: 25vh;
+    }
+}
+
+/* Large screens - maintain original design */
+@media screen and (min-width: 1025px) {
+    
+    /* PayPal logo - ensure consistent sizing on large screens */
+    .web-small-icon {
+        width: 16%;
+        min-width: 110px;
+        max-width: 180px;
+    }
+    
+    /* Ensure form doesn't get too wide on very large screens */
+    .main-form {
+        max-width: 500px;
+    }
+}
+
+/* Landscape mobile adjustments */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    
+    .main-form {
+        margin: 30px auto 0 auto;
+        padding: 15px 25px 25px 25px;
+    }
+    
+    .web-small-icon {
+        margin: 0 auto 20px auto;
+    }
+    
+    footer {
+        margin-top: 10vh;
+    }
+    
+    h1 {
+        font-size: 22px;
+        margin: 10px 0;
+    }
+}
+
+/* Very small screens (iPhone SE, etc.) */
+@media screen and (max-width: 375px) {
+    
+    .main-form {
+        width: 95%;
+        padding: 15px 20px 30px 20px;
+        margin: 40px auto 0 auto;
+    }
+    
+    .web-small-icon {
+        width: 28%;
+        min-width: 130px;
+        max-width: 220px;
+        margin: 0 auto 25px auto;
+    }
+    
+    input {
+        padding: 22px 8px 6px 8px;
+        font-size: 16px;
+    }
+    
+    .enable-btn, .cancel-btn {
+        font-size: 15px;
+        min-height: 42px;
+        padding: 12px 20px;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+    
+    footer span {
+        font-size: 10px;
+    }
+}
+
+/* High DPI displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2), 
+       screen and (min-resolution: 192dpi) {
+    
+    .web-small-icon {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    
+    body {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+    
+    .main-form {
+        background-color: #2d2d2d;
+        border-color: #404040;
+    }
+    
+    input {
+        background-color: #3a3a3a;
+        border-color: #555555;
+        color: #ffffff;
+    }
+    
+    label {
+        color: #cccccc;
+    }
+    
+    footer {
+        background-color: #2a2a2a;
+    }
+    
+    footer span {
+        color: #aaaaaa;
+    }
+}

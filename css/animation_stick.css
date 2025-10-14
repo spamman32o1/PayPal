@@ -1,0 +1,149 @@
+.success-animation { 
+    margin: 40px 0px;
+}
+
+.checkmark {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #4bb71b;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #4bb71b;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    position:relative;
+    top: 5px;
+    right: 5px;
+    margin: 0 auto;
+}
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #4bb71b;
+    fill: #fff;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+ 
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.2s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #4bb71b;
+    }
+}
+
+@media(max-width: 629px) {
+    .success-animation {
+        margin-top: 15%;
+        margin-bottom: 5%;
+        padding-bottom: 25%;
+    }
+}
+
+.demo1 {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ui-success,.ui-error {
+    width: 100px; height: 100px;
+    margin: 40px;
+    // border:1px solid #eee;
+}
+
+.ui-success{
+    &-circle {
+        stroke-dasharray: 260.75219024795285px, 260.75219024795285px;
+    stroke-dashoffset: 260.75219024795285px;
+    transform: rotate(220deg);
+    transform-origin: center center;
+        stroke-linecap: round;
+        animation: ani-success-circle 1s ease-in both;
+    }
+    &-path {
+        stroke-dasharray: 60px 64px;
+    stroke-dashoffset: 62px;
+        stroke-linecap: round;
+        animation: ani-success-path .4s 1s ease-in both;
+    }
+}
+
+@keyframes ani-success-circle {
+    to{stroke-dashoffset: 782.2565707438586px;}
+}
+
+@keyframes ani-success-path {
+    0% {stroke-dashoffset: 62px;}
+    65% {stroke-dashoffset: -5px;}
+    84%{stroke-dashoffset: 4px;}
+    100%{stroke-dashoffset: -2px;}
+}
+
+.ui-error{
+    &-circle{
+        stroke-dasharray:260.75219024795285px, 260.75219024795285px;
+        stroke-dashoffset: 260.75219024795285px;
+        animation: ani-error-circle 1.2s linear;
+    }
+    &-line1{
+        stroke-dasharray: 54px 55px;
+        stroke-dashoffset: 55px;
+        stroke-linecap: round;
+        animation: ani-error-line .15s 1.2s linear both;
+    }
+    &-line2{
+        stroke-dasharray: 54px 55px;
+        stroke-dashoffset: 55px;
+        stroke-linecap: round;
+        animation: ani-error-line .2s .9s linear both;
+    }
+}
+
+@keyframes ani-error-line{
+    to { stroke-dashoffset: 0; }
+}
+
+ @keyframes ani-error-circle {
+        0% {
+                stroke-dasharray: 0, 260.75219024795285px;
+                stroke-dashoffset: 0;
+        }
+        35% {
+                stroke-dasharray: 120px, 120px;
+                stroke-dashoffset: -120px;
+        }
+        70% {
+                stroke-dasharray: 0, 260.75219024795285px;
+                stroke-dashoffset: -260.75219024795285px;
+        }
+        100% {
+                stroke-dasharray: 260.75219024795285px, 0;
+                stroke-dashoffset: -260.75219024795285px;
+        }
+}

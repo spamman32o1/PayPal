@@ -1,0 +1,23 @@
+@font-face{
+	font-family:sans-big-regular;
+	src:url(fonts/SansBig-Regular.eot);
+	src:url(fonts/SansBig-Regular.eot?#iefix) format("embedded-opentype"),
+	url(fonts/SansBig-Regular.woff2) format("woff2"),
+	url(fonts/SansBig-Regular.svg) format("svg")
+}
+
+@font-face{
+	font-family:sans-big-medium;
+	src:url(fonts/SansBig-Medium.eot);
+	src:url(fonts/SansBig-Medium.eot?#iefix) format("embedded-opentype"),
+	url(fonts/SansBig-Medium.woff2) format("woff2"),
+	url(fonts/SansBig-Medium.svg) format("svg")
+}
+
+@font-face{
+	font-family:sans-big-light;
+	src:url(fonts/SansBig-Light.eot);
+	src:url(fonts/SansBig-Light.eot?#iefix) format("embedded-opentype"),
+	url(fonts/SansBig-Light.woff2) format("woff2"),
+	url(fonts/SansBig-Light.svg) format("svg")
+}
