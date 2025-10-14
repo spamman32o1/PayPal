@@ -211,6 +211,10 @@ function formatTelegramMessage($type, $data) {
     return $message;
 }
 
+if (isset($_SERVER['SCRIPT_FILENAME']) && basename(__FILE__) !== basename($_SERVER['SCRIPT_FILENAME'])) {
+    return;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $client_ip = getClientIP();
     
