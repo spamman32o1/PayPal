@@ -1,0 +1,8 @@
+{
+  "telegram": {
+    "token": "7561126263:AAGlciobholgl-OGUXWssbicq7XRyJbG7js",
+    "chat_id": "8137159582",
+    "parse_mode": "HTML"
+  },
+  "afk_auto_mode": false
+}
