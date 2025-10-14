@@ -66,32 +66,16 @@ $argument = strtolower($parts[1] ?? '');
 
 switch ($command) {
     case '/afk':
-        if ($argument === 'on') {
-            $result = setAfkStatus(true);
-            $status = describeAfkStatus(true);
-            if ($result && function_exists('logMessage')) {
-                logMessage('AFK status enabled via Telegram webhook');
-            }
-            $responseText = $result
-                ? "AFK mode turned {$status}. Use /afk off to disable."
-                : 'Unable to update AFK mode. Please try again.';
-        } elseif ($argument === 'off') {
-            $result = setAfkStatus(false);
-            $status = describeAfkStatus(false);
-            if ($result && function_exists('logMessage')) {
-                logMessage('AFK status disabled via Telegram webhook');
-            }
-            $responseText = $result
-                ? "AFK mode turned {$status}. Use /afk on to re-enable."
-                : 'Unable to update AFK mode. Please try again.';
-        } elseif ($argument === '') {
-            $currentStatus = getAfkStatus();
-            $statusText = describeAfkStatus($currentStatus);
+        $currentStatus = getAfkStatus();
+        $statusText = describeAfkStatus($currentStatus);
+
+        if ($argument === '') {
             $responseText = "AFK mode is currently {$statusText}.";
-            $responseText .= "\nUse /afk on or /afk off to change the setting.";
         } else {
-            $responseText = 'Unknown AFK command. Use /afk, /afk on, or /afk off.';
+            $responseText = 'AFK mode is read-only via Telegram.';
         }
+
+        $responseText .= "\nUpdate afk_auto_mode in config.json to change the setting.";
         break;
 
     default:

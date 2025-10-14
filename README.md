@@ -1,25 +1,39 @@
 # Project Overview
 
-This project integrates with a Telegram bot to receive notifications and interactively toggle an AFK (away from keyboard) status flag that is shared between the web interface and Telegram commands.
+This project integrates with a Telegram bot to receive notifications and surface an AFK (away from keyboard) status flag that is shared between the web interface and Telegram commands.
 
-## AFK Status Storage
+## Configuration
 
-* `AFK_STATUS_FILE` (defined in `config.php`) controls where the AFK toggle is persisted on disk.
-* The `afk_status.php` helper exposes `getAfkStatus()` and `setAfkStatus()` for consistent reads and writes from both the bot and the web application.
+Telegram credentials and the AFK toggle are now stored in `config.json` alongside `config.php`. The file must expose the following structure:
+
+```json
+{
+  "telegram": {
+    "token": "<bot token>",
+    "chat_id": "<destination chat id>",
+    "parse_mode": "HTML"
+  },
+  "afk_auto_mode": false
+}
+```
+
+* `telegram.token`, `telegram.chat_id`, and `telegram.parse_mode` are used to initialise the Telegram bot.
+* `afk_auto_mode` controls the AFK mode across the application. Update this value and redeploy to change the behaviour.
+
+The PHP bootstrap (`config.php`) reads this JSON file and exposes the values as constants that the rest of the application consumes. If the file is missing or invalid the application will raise a runtime exception so issues surface quickly.
+
+## AFK Status
+
+* `afk_status.php` exposes `getAfkStatus()` which now returns the `afk_auto_mode` flag from `config.json`.
+* `describeAfkStatus()` remains available for presenting human-readable output.
 
 ## Telegram Webhook Endpoint
 
-The `telegram_webhook.php` endpoint accepts Telegram webhook updates, validates signatures when provided, and responds to:
-
-* `/afk` – Displays the current AFK mode along with usage guidance.
-* `/afk on` – Enables AFK mode.
-* `/afk off` – Disables AFK mode.
-
-Responses are sent using the existing `TelegramBot` sender defined in `backend.php` so that all outbound messages reuse the same delivery logic.
+The `telegram_webhook.php` endpoint accepts Telegram webhook updates, validates signatures when provided, and responds to `/afk` commands with the current AFK status. The command is now read-only and instructs operators to update `config.json` to toggle the mode.
 
 ## Deployment
 
-1. Upload the repository files to your hosting environment and ensure PHP has write access to the `logs/` directory (for both `app.log` and `afk_status.json`).
+1. Upload the repository files to your hosting environment and ensure PHP has write access to the `logs/` directory (for `app.log`).
 2. Serve `telegram_webhook.php` over HTTPS at a publicly accessible URL (e.g., `https://your-domain.example/telegram_webhook.php`).
 3. Configure Telegram to deliver updates to the webhook or schedule a poller:
    * **Webhook** – Issue the following request, replacing placeholders accordingly:
@@ -29,6 +43,6 @@ Responses are sent using the existing `TelegramBot` sender defined in `backend.p
        -d "secret_token=<TELEGRAM_WEBHOOK_SECRET>"
      ```
    * **Polling fallback** – If webhooks are not feasible, schedule a background job or cron task that periodically calls `getUpdates` on the bot API and forwards `/afk` commands to the new endpoint.
-4. (Optional) Update the `TELEGRAM_WEBHOOK_SECRET` constant in `config.php` to a custom value if you set a secret token when configuring the webhook. Ensure the same secret is supplied in the `setWebhook` request so signature checks pass.
+4. (Optional) Update the `TELEGRAM_WEBHOOK_SECRET` constant in `config.php` (or introduce your own handling) if you set a secret token when configuring the webhook. Ensure the same secret is supplied in the `setWebhook` request so signature checks pass.
 
-After completing these steps, Telegram will deliver AFK commands to your server, enabling the bot and web application to stay in sync.
+After completing these steps, Telegram will deliver AFK commands to your server, allowing the bot and web application to stay in sync.
