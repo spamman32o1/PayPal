@@ -1,0 +1,66 @@
+🔍 What Does Botfaqtor Fingerprint?
+
+
+🧬 Browser & Device Properties
+
+    - navigator.userAgent, platform, vendor, oscpu
+    - deviceMemory, hardwareConcurrency
+    - productSub
+    - navigator.plugins.length & plugin presence
+    - ActiveXObject detection (legacy IE)
+    - navigator.webdriver (Headless/automation)
+    - window.chrome, callPhantom, domAutomationController
+
+🖥️ Display & Screen
+
+    - Screen resolution (screen.width, availWidth)
+    - Color depth (screen.colorDepth)
+    - Pixel ratio
+    - Fullscreen support
+    - Mouse and touch capability
+
+📚 Fonts (font fingerprinting)
+
+    - Tests presence of 70+ fonts using DOM size mismatch
+    - Uses base fonts: monospace, sans-serif, serif
+
+🕸️ WebGL Fingerprinting
+
+    - Canvas creation
+    - WEBGL_debug_renderer_info → real GPU vendor & renderer string
+
+🎧 Audio Fingerprint (implied in other files)
+
+    - Uses oscillator in AudioContext (in fingerprint_js2.js)
+
+🌍 Location / Language / Timezone
+
+    - navigator.language, navigator.languages
+    - Timezone from Intl.DateTimeFormat().resolvedOptions().timeZone
+    - getTimezoneOffset()
+
+🛑 Anti-Privacy & Lie Detection
+
+    - Adblock detection via invisible .adsbox div
+    - Do Not Track status
+    - Heuristic checks:
+    - hasLiedBrowser
+    - hasLiedOS
+    - hasLiedResolution
+    - hasLiedLanguages
+
+🧠 Other Components
+
+    - clipboard API presence
+    - navigator.mediaDevices.getUserMedia (1–2–0 detection)
+    - sendBeacon support
+    - window.top === window.self (iframe check)
+    - document.hasFocus()
+    - Hidden tab detection (webkitHidden, mozHidden, etc.)
+    - Evercookie components (persistent ID)
+
+📦 Plus:
+
+ua-parser-js to map device/OS from UA string
+
+Components are hashed via fp.x64hash128() for ID tracking
