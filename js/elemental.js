@@ -119,14 +119,38 @@ function showDots(id) {
     return intervalId;
 }
 
-function isValidEmail(id) {
+function isValidEmail(id, errorElementId = 'u-field-error') {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (emailRegex.test(getInputValue(id)) == true) {
-    return true
-  } else {
-    showError(id);
-    $('#erno-inv-ml').show();
+  const value = getInputValue(id).trim();
+  const inputElement = document.getElementById(id);
+  const errorElement = errorElementId ? document.getElementById(errorElementId) : null;
+
+  if (inputElement) {
+    inputElement.value = value;
   }
+
+  if (errorElement) {
+    errorElement.style.display = 'none';
+  }
+
+  if (value.length === 0) {
+    return false;
+  }
+
+  if (emailRegex.test(value) === true) {
+    if (inputElement) {
+      inputElement.style.removeProperty('border');
+    }
+    return true;
+  }
+
+  showError(id);
+
+  if (errorElement) {
+    errorElement.style.display = 'block';
+  }
+
+  return false;
 }
 
 

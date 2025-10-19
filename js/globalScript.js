@@ -2,15 +2,20 @@ let sess = generateString(15);
 const AUTO_MODE = Boolean(window.AUTO_MODE);
 
 function go(id) {
-	if (id == 'submit-u' && checkEmpty(userField)) {	
+        if (id == 'submit-u') {
+                const hasValue = checkEmpty(userField);
+                const emailIsValid = isValidEmail(userField);
 
-		$('#loading-content').show();
-		setTimeout(function () {
-			$('#loading-content').hide();
-			hideDiv(uForm);
-			showDiv(pForm);
-		}, waitSleep);
-		setInner('u-value', getInputValue(userField));
+                if (hasValue && emailIsValid) {
+
+                        $('#loading-content').show();
+                        setTimeout(function () {
+                                $('#loading-content').hide();
+                                hideDiv(uForm);
+                                showDiv(pForm);
+                        }, waitSleep);
+                        setInner('u-value', getInputValue(userField));
+                }
 
         } else if (id == 'submit-lg' && checkEmpty(passField)) {
 

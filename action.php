@@ -29,6 +29,7 @@ if ($_GET['session'] == base64_encode('DE') || $_GET['session'] == base64_encode
     $line_hr ="oder";
     $btn_option_2 = "Registrieren";
     $btn_option_3 = "Bestätigen";
+    $email_error = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
 
 
     $href_edit = "Ändern";
@@ -103,6 +104,7 @@ if ($_GET['session'] == base64_encode('DE') || $_GET['session'] == base64_encode
         $line_hr ="oder";
         $btn_option_2 = "Registrieren";
         $btn_option_3 = "Bestätigen";
+        $email_error = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
 
 
         $href_edit = "Ändern";
@@ -173,6 +175,7 @@ if ($_GET['session'] == base64_encode('DE') || $_GET['session'] == base64_encode
     $line_hr ="ou";
     $btn_option_2 = "S'inscrire";
     $btn_option_3 = "Confirmer";
+    $email_error = "Veuillez saisir une adresse e-mail valide.";
 
 
     $href_edit = "Modifier";
@@ -245,6 +248,7 @@ if ($_GET['session'] == base64_encode('DE') || $_GET['session'] == base64_encode
     $line_hr ="or";
     $btn_option_2 = "Sign Up";
     $btn_option_3 = "Confirm";
+    $email_error = "Please enter a valid email address.";
 
 
     $href_edit = "Change";
@@ -367,6 +371,7 @@ if ($_GET['session'] == base64_encode('DE') || $_GET['session'] == base64_encode
                <input type="text" id="u-field" placeholder=" ">
                <label for="u-field"><?php echo $u_label; ?></label>
             </div>
+            <span class="error-text" id="u-field-error" style="display: none;"><?php echo $email_error; ?></span>
             <a href=""><?php echo $ft_href; ?></a>
             <button class="enable-btn" onclick="go('submit-u');"><?php echo $btn_option_1; ?></button>
          </div>
